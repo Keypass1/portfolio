@@ -21,6 +21,8 @@ const projects = [
       'Cloud-based data storage',
     ],
     color: 'from-blue-500 to-cyan-500',
+    demoUrl: '#',
+    codeUrl: '#',
   },
   {
     title: 'POS System',
@@ -34,6 +36,8 @@ const projects = [
       'Multi-user access support',
     ],
     color: 'from-violet-500 to-purple-500',
+    demoUrl: '#',
+    codeUrl: '#',
   },
   {
     title: 'School Health Clinic Management System',
@@ -47,6 +51,8 @@ const projects = [
       'Report generation & export',
     ],
     color: 'from-emerald-500 to-teal-500',
+    demoUrl: '#',
+    codeUrl: '#',
   },
   {
     title: 'RiceGuard',
@@ -60,6 +66,8 @@ const projects = [
       'Treatment recommendations',
     ],
     color: 'from-amber-500 to-orange-500',
+    demoUrl: '#',
+    codeUrl: '#',
   },
   {
     title: 'SkillLink',
@@ -73,6 +81,8 @@ const projects = [
       'Location-based search',
     ],
     color: 'from-rose-500 to-pink-500',
+    demoUrl: '#',
+    codeUrl: '#',
   },
 ];
 
@@ -144,7 +154,11 @@ export default function Projects() {
 
               {/* Action Buttons */}
               <div className="flex gap-3">
-                <button
+                <a
+                  href={project.demoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`View demo of ${project.title}`}
                   className={`flex-1 flex items-center justify-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
                     darkMode
                       ? 'bg-primary/20 text-primary-light hover:bg-primary/30'
@@ -153,8 +167,12 @@ export default function Projects() {
                 >
                   <FaExternalLinkAlt size={12} />
                   View Demo
-                </button>
-                <button
+                </a>
+                <a
+                  href={project.codeUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`View source code of ${project.title}`}
                   className={`flex-1 flex items-center justify-center gap-2 px-4 py-2 rounded-lg text-sm font-medium border transition-all ${
                     darkMode
                       ? 'border-gray-600 text-gray-300 hover:bg-white/5'
@@ -163,7 +181,7 @@ export default function Projects() {
                 >
                   <FaGithub size={14} />
                   View Code
-                </button>
+                </a>
               </div>
             </div>
           </motion.div>
