@@ -5,7 +5,7 @@ import SectionWrapper from './SectionWrapper.jsx';
 import { FaGithub, FaLinkedin, FaEnvelope, FaPaperPlane } from 'react-icons/fa';
 
 /**
- * Contact - Contact form with validation and social links.
+ * Contact - Modern contact form with glassmorphism and social links.
  */
 
 const socialLinks = [
@@ -13,19 +13,19 @@ const socialLinks = [
     name: 'GitHub',
     icon: FaGithub,
     url: 'https://github.com/',
-    color: 'hover:text-gray-900 dark:hover:text-white',
+    color: 'from-gray-700 to-gray-900',
   },
   {
     name: 'LinkedIn',
     icon: FaLinkedin,
     url: 'https://linkedin.com/',
-    color: 'hover:text-blue-600',
+    color: 'from-blue-500 to-blue-700',
   },
   {
     name: 'Email',
     icon: FaEnvelope,
     url: 'mailto:cornelio.lantes@email.com',
-    color: 'hover:text-red-500',
+    color: 'from-red-400 to-rose-600',
   },
 ];
 
@@ -71,12 +71,12 @@ export default function Contact() {
   };
 
   const inputClasses = (fieldName) =>
-    `w-full px-4 py-3 rounded-lg border text-sm transition-all outline-none ${
+    `w-full px-4 py-3 rounded-xl border text-sm transition-all duration-300 outline-none ${
       errors[fieldName]
-        ? 'border-red-400 focus:border-red-500 focus:ring-2 focus:ring-red-200'
+        ? 'border-red-400 focus:border-red-500 focus:ring-2 focus:ring-red-200/50'
         : darkMode
-        ? 'bg-dark-card border-gray-700 text-white placeholder-gray-500 focus:border-primary focus:ring-2 focus:ring-primary/20'
-        : 'bg-white border-gray-300 text-gray-900 placeholder-gray-400 focus:border-primary focus:ring-2 focus:ring-primary/20'
+        ? 'bg-dark-card/50 border-dark-border text-white placeholder-gray-600 focus:border-primary/50 focus:ring-2 focus:ring-primary/10'
+        : 'bg-gray-50 border-gray-200 text-gray-900 placeholder-gray-400 focus:border-primary/50 focus:ring-2 focus:ring-primary/10 focus:bg-white'
     }`;
 
   return (
@@ -94,32 +94,41 @@ export default function Contact() {
           transition={{ duration: 0.6, delay: 0.2 }}
         >
           {submitted ? (
-            <div
-              className={`rounded-xl p-8 text-center border ${
-                darkMode ? 'bg-dark-card border-gray-700' : 'bg-white border-gray-200'
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className={`rounded-2xl p-8 text-center border ${
+                darkMode ? 'bg-dark-card border-dark-border' : 'bg-white border-gray-100'
               }`}
             >
-              <div className="text-5xl mb-4">✉️</div>
+              <motion.div
+                className="text-5xl mb-4"
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ type: 'spring', stiffness: 300, delay: 0.2 }}
+              >
+                ✉️
+              </motion.div>
               <h3 className={`text-xl font-bold mb-2 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
                 Message Sent!
               </h3>
-              <p className={darkMode ? 'text-gray-400' : 'text-gray-500'}>
+              <p className={`mb-6 ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
                 Thank you for reaching out. I&apos;ll get back to you as soon as possible.
               </p>
               <button
                 onClick={() => setSubmitted(false)}
-                className="mt-4 px-6 py-2 rounded-lg bg-primary text-white text-sm font-medium hover:bg-primary-dark transition-colors"
+                className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-primary to-accent text-white text-sm font-medium hover:shadow-lg hover:shadow-primary/20 transition-all duration-300"
               >
                 Send Another Message
               </button>
-            </div>
+            </motion.div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-4" noValidate>
+            <form onSubmit={handleSubmit} className="space-y-5" noValidate>
               {/* Name Field */}
               <div>
                 <label
                   htmlFor="name"
-                  className={`block text-sm font-medium mb-1.5 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}
+                  className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}
                 >
                   Name
                 </label>
@@ -132,14 +141,22 @@ export default function Contact() {
                   placeholder="Your name"
                   className={inputClasses('name')}
                 />
-                {errors.name && <p className="text-red-400 text-xs mt-1">{errors.name}</p>}
+                {errors.name && (
+                  <motion.p
+                    initial={{ opacity: 0, y: -5 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="text-red-400 text-xs mt-1.5"
+                  >
+                    {errors.name}
+                  </motion.p>
+                )}
               </div>
 
               {/* Email Field */}
               <div>
                 <label
                   htmlFor="email"
-                  className={`block text-sm font-medium mb-1.5 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}
+                  className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}
                 >
                   Email
                 </label>
@@ -152,14 +169,22 @@ export default function Contact() {
                   placeholder="your.email@example.com"
                   className={inputClasses('email')}
                 />
-                {errors.email && <p className="text-red-400 text-xs mt-1">{errors.email}</p>}
+                {errors.email && (
+                  <motion.p
+                    initial={{ opacity: 0, y: -5 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="text-red-400 text-xs mt-1.5"
+                  >
+                    {errors.email}
+                  </motion.p>
+                )}
               </div>
 
               {/* Message Field */}
               <div>
                 <label
                   htmlFor="message"
-                  className={`block text-sm font-medium mb-1.5 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}
+                  className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}
                 >
                   Message
                 </label>
@@ -172,15 +197,23 @@ export default function Contact() {
                   rows={5}
                   className={inputClasses('message')}
                 />
-                {errors.message && <p className="text-red-400 text-xs mt-1">{errors.message}</p>}
+                {errors.message && (
+                  <motion.p
+                    initial={{ opacity: 0, y: -5 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="text-red-400 text-xs mt-1.5"
+                  >
+                    {errors.message}
+                  </motion.p>
+                )}
               </div>
 
               {/* Submit Button */}
               <button
                 type="submit"
-                className="w-full flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-primary to-accent text-white font-semibold shadow-lg shadow-primary/25 hover:shadow-primary/40 hover:scale-[1.02] transition-all duration-200"
+                className="group w-full flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-gradient-to-r from-primary to-accent text-white font-semibold shadow-lg shadow-primary/20 hover:shadow-primary/40 hover:scale-[1.02] transition-all duration-300"
               >
-                <FaPaperPlane size={14} />
+                <FaPaperPlane size={14} className="group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform duration-300" />
                 Send Message
               </button>
             </form>
@@ -198,45 +231,45 @@ export default function Contact() {
           <h3 className={`text-2xl font-bold mb-4 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
             Let&apos;s Connect
           </h3>
-          <p className={`mb-8 leading-relaxed ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+          <p className={`mb-8 leading-relaxed ${darkMode ? 'text-gray-500' : 'text-gray-400'}`}>
             I&apos;m always open to discussing new projects, creative ideas, or opportunities to be
             part of your vision. Feel free to reach out through any of the channels below.
           </p>
 
           {/* Social Links */}
-          <div className="space-y-4">
-            {socialLinks.map((link) => {
+          <div className="space-y-3">
+            {socialLinks.map((link, index) => {
               const Icon = link.icon;
               return (
-                <a
+                <motion.a
                   key={link.name}
                   href={link.url}
                   target={link.url.startsWith('mailto') ? undefined : '_blank'}
                   rel={link.url.startsWith('mailto') ? undefined : 'noopener noreferrer'}
-                  className={`flex items-center gap-4 p-4 rounded-xl border transition-all duration-200 group ${
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: 0.5 + index * 0.1 }}
+                  className={`flex items-center gap-4 p-4 rounded-2xl border transition-all duration-300 group hover:scale-[1.02] ${
                     darkMode
-                      ? 'border-gray-700 hover:border-gray-600 hover:bg-dark-card'
-                      : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50'
+                      ? 'border-dark-border hover:border-primary/20 hover:bg-dark-card/80'
+                      : 'border-gray-100 hover:border-primary/20 hover:bg-gray-50'
                   }`}
                 >
                   <div
-                    className={`w-10 h-10 rounded-lg flex items-center justify-center transition-colors ${
-                      darkMode
-                        ? 'bg-gray-800 text-gray-400 group-hover:text-primary-light'
-                        : 'bg-gray-100 text-gray-500 group-hover:text-primary'
-                    }`}
+                    className={`w-11 h-11 rounded-xl bg-gradient-to-br ${link.color} flex items-center justify-center text-white shadow-lg transition-transform duration-300 group-hover:scale-110`}
                   >
-                    <Icon size={20} />
+                    <Icon size={18} />
                   </div>
                   <div>
-                    <p className={`text-sm font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+                    <p className={`text-sm font-bold ${darkMode ? 'text-white' : 'text-gray-900'}`}>
                       {link.name}
                     </p>
                     <p className={`text-xs ${darkMode ? 'text-gray-500' : 'text-gray-400'}`}>
                       {link.url.replace('https://', '').replace('mailto:', '')}
                     </p>
                   </div>
-                </a>
+                </motion.a>
               );
             })}
           </div>

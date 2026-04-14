@@ -4,8 +4,9 @@ import SectionWrapper from './SectionWrapper.jsx';
 import { FaExternalLinkAlt, FaGithub } from 'react-icons/fa';
 
 /**
- * Projects - Displays portfolio projects in a responsive card grid.
+ * Projects - Displays portfolio projects in a modern card grid.
  * Each card shows title, description, tech stack, features, and action buttons.
+ * Uses card-shine effect and gradient borders for modern feel.
  */
 
 const projects = [
@@ -21,6 +22,7 @@ const projects = [
       'Cloud-based data storage',
     ],
     color: 'from-blue-500 to-cyan-500',
+    emoji: '🎓',
     demoUrl: '#',
     codeUrl: '#',
   },
@@ -36,6 +38,7 @@ const projects = [
       'Multi-user access support',
     ],
     color: 'from-violet-500 to-purple-500',
+    emoji: '💳',
     demoUrl: '#',
     codeUrl: '#',
   },
@@ -51,6 +54,7 @@ const projects = [
       'Report generation & export',
     ],
     color: 'from-emerald-500 to-teal-500',
+    emoji: '🏥',
     demoUrl: '#',
     codeUrl: '#',
   },
@@ -66,6 +70,7 @@ const projects = [
       'Treatment recommendations',
     ],
     color: 'from-amber-500 to-orange-500',
+    emoji: '🌾',
     demoUrl: '#',
     codeUrl: '#',
   },
@@ -81,6 +86,7 @@ const projects = [
       'Location-based search',
     ],
     color: 'from-rose-500 to-pink-500',
+    emoji: '🔗',
     demoUrl: '#',
     codeUrl: '#',
   },
@@ -103,38 +109,45 @@ export default function Projects() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
-            className={`group rounded-xl overflow-hidden border transition-all duration-300 hover:shadow-xl hover:-translate-y-1 ${
+            className={`group card-shine gradient-border rounded-2xl overflow-hidden border transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 ${
               darkMode
-                ? 'bg-dark-card border-gray-700 hover:border-gray-600'
-                : 'bg-white border-gray-200 hover:border-gray-300'
+                ? 'bg-dark-card border-dark-border hover:shadow-primary/5'
+                : 'bg-white border-gray-100 hover:shadow-gray-200/50'
             }`}
           >
-            {/* Project Image Placeholder */}
-            <div className={`h-44 bg-gradient-to-br ${project.color} flex items-center justify-center relative overflow-hidden`}>
-              <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-all" />
-              <span className="text-white text-lg font-bold text-center px-4 relative z-10">
-                {project.title}
-              </span>
+            {/* Project Header with Gradient */}
+            <div className={`relative h-40 bg-gradient-to-br ${project.color} flex items-center justify-center overflow-hidden`}>
+              <div className="absolute inset-0 bg-black/5 group-hover:bg-black/0 transition-all duration-500" />
+              <motion.span
+                className="text-5xl relative z-10"
+                whileHover={{ scale: 1.2, rotate: 5 }}
+                transition={{ type: 'spring', stiffness: 300 }}
+              >
+                {project.emoji}
+              </motion.span>
+              {/* Decorative circles */}
+              <div className="absolute -bottom-8 -right-8 w-32 h-32 rounded-full bg-white/10" />
+              <div className="absolute -top-4 -left-4 w-20 h-20 rounded-full bg-white/5" />
             </div>
 
             {/* Card Content */}
-            <div className="p-5">
+            <div className="p-6">
               <h3 className={`text-lg font-bold mb-2 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
                 {project.title}
               </h3>
-              <p className={`text-sm mb-3 line-clamp-3 ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+              <p className={`text-sm mb-4 line-clamp-2 leading-relaxed ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
                 {project.description}
               </p>
 
               {/* Tech Stack Tags */}
-              <div className="flex flex-wrap gap-1.5 mb-3">
+              <div className="flex flex-wrap gap-1.5 mb-4">
                 {project.techStack.map((tech) => (
                   <span
                     key={tech}
-                    className={`px-2 py-0.5 rounded text-xs font-medium ${
+                    className={`px-2.5 py-0.5 rounded-full text-xs font-medium ${
                       darkMode
-                        ? 'bg-primary/10 text-primary-light'
-                        : 'bg-primary/10 text-primary-dark'
+                        ? 'bg-primary/10 text-primary-light border border-primary/20'
+                        : 'bg-primary/5 text-primary border border-primary/10'
                     }`}
                   >
                     {tech}
@@ -143,10 +156,10 @@ export default function Projects() {
               </div>
 
               {/* Features */}
-              <ul className={`text-xs space-y-1 mb-4 ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+              <ul className={`text-xs space-y-1.5 mb-5 ${darkMode ? 'text-gray-500' : 'text-gray-400'}`}>
                 {project.features.map((feature) => (
-                  <li key={feature} className="flex items-start gap-1.5">
-                    <span className="text-primary mt-0.5">•</span>
+                  <li key={feature} className="flex items-start gap-2">
+                    <span className="text-primary mt-0.5 text-[10px]">▸</span>
                     {feature}
                   </li>
                 ))}
@@ -159,28 +172,24 @@ export default function Projects() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`View demo of ${project.title}`}
-                  className={`flex-1 flex items-center justify-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-                    darkMode
-                      ? 'bg-primary/20 text-primary-light hover:bg-primary/30'
-                      : 'bg-primary/10 text-primary-dark hover:bg-primary/20'
-                  }`}
+                  className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium bg-gradient-to-r from-primary to-accent text-white hover:shadow-lg hover:shadow-primary/20 transition-all duration-300"
                 >
-                  <FaExternalLinkAlt size={12} />
-                  View Demo
+                  <FaExternalLinkAlt size={11} />
+                  Demo
                 </a>
                 <a
                   href={project.codeUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`View source code of ${project.title}`}
-                  className={`flex-1 flex items-center justify-center gap-2 px-4 py-2 rounded-lg text-sm font-medium border transition-all ${
+                  className={`flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium border transition-all duration-300 ${
                     darkMode
-                      ? 'border-gray-600 text-gray-300 hover:bg-white/5'
-                      : 'border-gray-300 text-gray-600 hover:bg-gray-50'
+                      ? 'border-dark-border text-gray-300 hover:border-primary/30 hover:text-primary-light hover:bg-primary/5'
+                      : 'border-gray-200 text-gray-600 hover:border-primary/30 hover:text-primary hover:bg-primary/5'
                   }`}
                 >
                   <FaGithub size={14} />
-                  View Code
+                  Code
                 </a>
               </div>
             </div>

@@ -17,7 +17,7 @@ function App() {
 
   return (
     <Router>
-      <div className={`min-h-screen transition-colors duration-300 ${darkMode ? 'bg-dark-bg text-dark-text' : 'bg-white text-gray-900'}`}>
+      <div className={`min-h-screen transition-colors duration-500 ${darkMode ? 'bg-dark-bg text-dark-text' : 'bg-white text-gray-900'}`}>
         <Navbar />
         <main>
           <Hero />
