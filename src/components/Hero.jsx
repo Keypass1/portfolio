@@ -78,7 +78,7 @@ export default function Hero() {
                 : 'border-primary/20 bg-primary/5 text-primary'
             }`}
           >
-            <span className="inline-block w-2 h-2 rounded-full bg-emerald-400 mr-2 animate-pulse" />
+            <span className="inline-block w-2 h-2 rounded-full bg-emerald-400 mr-2 animate-pulse" aria-hidden="true" />
             Available for work
           </span>
         </motion.div>

@@ -62,6 +62,7 @@ const skillCategories = [
   },
 ];
 
+// Update these statistics as the portfolio grows
 const highlights = [
   { number: '5+', label: 'Projects Completed' },
   { number: '3+', label: 'Years Learning' },

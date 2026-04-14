@@ -12,9 +12,7 @@ export default function SectionWrapper({ id, title, subtitle, children }) {
   return (
     <section
       id={id}
-      className={`relative py-24 px-4 sm:px-6 lg:px-8 ${
-        darkMode ? '' : ''
-      }`}
+      className="relative py-24 px-4 sm:px-6 lg:px-8"
     >
       <motion.div
         className="max-w-7xl mx-auto"
